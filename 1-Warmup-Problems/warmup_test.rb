@@ -12,9 +12,11 @@ class SolutionTest < Minitest::Test
   end
 
   def test_nth_lucas
+    assert_equal 7, nth_lucas(4)
   end
 
   def test_first_lucas
+    assert_equal [2, 1, 3, 4, 7], first_lucas(5)
   end
 
   def test_count_digits
@@ -66,6 +68,7 @@ class SolutionTest < Minitest::Test
   end
 
   def test_largest_palindrome
+    assert_equal 1234321, largest_palindrome(1234322)
   end
 
   def test_is_number_prime
@@ -82,14 +85,22 @@ class SolutionTest < Minitest::Test
     assert_equal expected, list_first_primes(5)
   end
 
-  # def test_sieve_of_erathostene
-  #   expected = [2, 3, 5, 7, 11]
+  def test_sieve_of_erathostene
+    expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
-  #   assert_equal expected, sieve_of_eratosthenes(5)
-  # end
+    assert_equal expected, sieve_of_eratosthenes(30)
+  end
 
   def test_sum_of_numbers_in_string
     assert_equal 56, sum_of_numbers_in_string('1abc33xyz22')
+  end
+
+  def test_sum_of_numbers_in_string_2
+    assert_equal 1111, sum_of_numbers_in_string('1111')
+  end
+
+  def test_sum_of_numbers_in_string_3
+    assert_equal 0, sum_of_numbers_in_string('abcd')
   end
 
   def test_anagram
