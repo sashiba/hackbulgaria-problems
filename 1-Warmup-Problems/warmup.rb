@@ -10,7 +10,7 @@ def nth_lucas(n)
 end
 
 def first_lucas(n)
-  1.upto(n).map { |index| nth_lucas index }
+  0.upto(n - 1).map { |index| nth_lucas index }
 end
 
 def count_digits(n)
@@ -108,56 +108,29 @@ def sieve_of_eratosthenes(n)
   numbers = []
   2.upto(n) { |i| numbers << i }
   cur = 2
-  while cur <= n do
-    i = 2
-    if prime?(cur)
-      while i <= n do
-        numbers.delete(cur * i)
-        i += 1
-      end
-      cur += 1
-    else
-      cur += 1
-    end
+
+  2.upto(n) do |i|
+    i.upto(n) { |j| numbers.delete(cur * j) } if prime? cur
+    cur += 1
   end
 
   numbers
 end
 
-# def sieve_of_Eratosthenes(n)
-#   numbers = []
-#   2.upto(n) { |i| numbers << i }
-#   cur = 2
-#   while cur <= n do
-#     i = 2
-#     if is_prime(cur)
-#       while i <= n do
-#         numbers.delete(cur * i)
-#         i += 1
-#       end
-#       cur += 1
-#     else 
-#       cur += 1
+# def sum_of_numbers_in_string(str)
+#   sum = 0
+#   str_int = ''
+#   str.chars.each do |char|
+#     str_int << char if char.between?('1', '9')
+#     unless char.between?('1', '9')
+#       sum += str_int.to_i
+#       str_int = ''
 #     end
 #   end
-#
-#   numbers
+#   sum += str_int.to_i unless str_int.empty?
+
+#   sum
 # end
-
-def sum_of_numbers_in_string(str)
-  sum = 0
-  str_int = ''
-  str.chars.each do |char|
-    str_int << char if char.between?('1', '9')
-    unless char.between?('1', '9')
-      sum += str_int.to_i
-      str_int = ''
-    end
-  end
-  sum += str_int.to_i unless str_int.empty?
-
-  sum
-end
 
 def anagram?(a, b)
   a.chars.sort == b.chars.sort
@@ -183,19 +156,19 @@ def balanced?(n)
 end
 
 def zero_insert(n)
-  n = n.to_s
-  a = n[0]
+  result = n[0].to_s
+  n = n.to_s.slice(1, n.to_s.length)
   j = 0
-  n = n.slice(1, n.length)
-  n.each_char do |i|
-    if (a[j] == i) || (a[j].to_i + i.to_i) % 10 == 0
-      a = a + '0' + i
+
+  n.each_char do |digit|
+    if (result[j] == digit) || (result[j].to_i + digit.to_i) % 10 == 0
+      result += '0' + digit
       j += 2
     else
-      a += i
+      result += digit
       j += 1
     end
   end
 
-  a
+  result.to_i
 end
