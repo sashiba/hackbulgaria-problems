@@ -117,20 +117,23 @@ def sieve_of_eratosthenes(n)
   numbers
 end
 
-# def sum_of_numbers_in_string(str)
-#   sum = 0
-#   str_int = ''
-#   str.chars.each do |char|
-#     str_int << char if char.between?('1', '9')
-#     unless char.between?('1', '9')
-#       sum += str_int.to_i
-#       str_int = ''
-#     end
-#   end
-#   sum += str_int.to_i unless str_int.empty?
+def char_is_positive_digit?(n)
+  123_456_789_0.to_s.chars.include? n
+end
 
-#   sum
-# end
+def sum_of_numbers_in_string(str)
+  result = 0
+  number = ''
+  str.chars.each do |char|
+    number += char if char_is_positive_digit? char
+    unless char_is_positive_digit? char
+      result += number.to_i
+      number = ''
+    end
+  end
+
+  result += number.to_i
+end
 
 def anagram?(a, b)
   a.chars.sort == b.chars.sort
@@ -156,10 +159,9 @@ def balanced?(n)
 end
 
 def zero_insert(n)
-  result = n[0].to_s
+  result = n.to_s[0]
   n = n.to_s.slice(1, n.to_s.length)
   j = 0
-
   n.each_char do |digit|
     if (result[j] == digit) || (result[j].to_i + digit.to_i) % 10 == 0
       result += '0' + digit
