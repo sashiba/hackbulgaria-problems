@@ -136,7 +136,7 @@ def sum_of_numbers_in_string(str)
   result += number.to_i
 end
 
-def anagram?(a, b)
+def anagrams?(a, b)
   a.chars.sort == b.chars.sort
 end
 
