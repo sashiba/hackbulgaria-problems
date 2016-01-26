@@ -1,4 +1,5 @@
 def fact(n)
+  return 0 if n == 0
   1.upto(n).reduce(:*)
 end
 
