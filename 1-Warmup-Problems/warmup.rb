@@ -92,7 +92,7 @@ def prime?(n)
   true
 end
 
-def list_first_primes(n)
+def first_primes(n)
   list = []
   current = 1
   while current <= n do
